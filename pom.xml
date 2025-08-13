@@ -9,9 +9,15 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rookies4</groupId>
+<<<<<<< HEAD
+	<artifactId>SpringBoot3Practice1</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>SpringBoot3Practice1</name>
+=======
 	<artifactId>MySpringBoot3Project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MySpringBoot3Project</name>
+>>>>>>> f1e78ffd504280337fb522ce0e4fdee6f4de2882
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -29,9 +35,19 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-boot-admin.version>3.4.7</spring-boot-admin.version>
+<<<<<<< HEAD
+	</properties>
+	<dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+=======
         <spring-framework.version>6.2.8</spring-framework.version>
 	</properties>
 	<dependencies>
+>>>>>>> f1e78ffd504280337fb522ce0e4fdee6f4de2882
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
