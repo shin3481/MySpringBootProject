@@ -14,9 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Student {
-    
+    //PK (Sequential Value)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
     private Long id;
     
     @Column(nullable = false)
@@ -24,6 +25,9 @@ public class Student {
     
     @Column(nullable = false, unique = true)
     private String studentNumber;
-    
+
+    //양방향관계 Student에서 StudentDetail을 참조할 수 있도록 FK에 해당하는 필드명을 mappedBy에 설장한다.
+    //1:1관계 지연로딩
+    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private StudentDetail studentDetail;
 }

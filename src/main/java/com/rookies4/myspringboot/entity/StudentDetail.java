@@ -16,22 +16,28 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class StudentDetail {
-    
+    //PK (Sequential Value)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_detail_id")
     private Long id;
-    
+    //주소
     @Column(nullable = false)
     private String address;
-    
+
+    //전화번호
     @Column(nullable = false)
     private String phoneNumber;
-    
-    @Column
+    //이메일주소
+    @Column(unique = true,nullable = false)
     private String email;
-    
+    //생년월릴
     @Column
     private LocalDate dateOfBirth;
-    
+    //
+    //@JoinColumn은 FK(외래키)에 해당하는 어노테이션
+    //1:1관계 지연로딩
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id",unique = true) //안적어도 자동인식
     private Student student;
 }
