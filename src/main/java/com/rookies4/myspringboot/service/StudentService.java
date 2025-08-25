@@ -70,26 +70,27 @@ public class StudentService {
         }
 
         // Create student entity
-        Student student = Student.builder()
+        Student studentEntity = Student.builder()
                 .name(request.getName())
                 .studentNumber(request.getStudentNumber())
                 .build();
         
         // Create student detail if provided
         if (request.getDetailRequest() != null) {
-            StudentDetail studentDetail = StudentDetail.builder()
+            StudentDetail studentDetailEntity = StudentDetail.builder()
                     .address(request.getDetailRequest().getAddress())
                     .phoneNumber(request.getDetailRequest().getPhoneNumber())
                     .email(request.getDetailRequest().getEmail())
                     .dateOfBirth(request.getDetailRequest().getDateOfBirth())
-                    .student(student)
+                    //양방향 연관관계 - StudentDetail에게 Student 객체의 레퍼런스 알려주기
+                    .student(studentEntity)
                     .build();
-            
-            student.setStudentDetail(studentDetail);
+            //양방향 연관관계 - Student에게 StudentDetail 객체의 레퍼런스 알려주기
+            studentEntity.setStudentDetail(studentDetailEntity);
         }
 
         // Save and return the student
-        Student savedStudent = studentRepository.save(student);
+        Student savedStudent = studentRepository.save(studentEntity);
         return StudentDTO.Response.fromEntity(savedStudent);
     }
 
@@ -119,6 +120,7 @@ public class StudentService {
             // Create new detail if not exists
             if (studentDetail == null) {
                 studentDetail = new StudentDetail();
+                //양방향 연관관계 설정
                 studentDetail.setStudent(student);
                 student.setStudentDetail(studentDetail);
             }
