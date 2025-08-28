@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//StudentController 클래스
 @RestController
 @RequestMapping("/api/students")
 @RequiredArgsConstructor
 public class StudentController {
+
     private final StudentService studentService;
 
     @GetMapping
@@ -30,15 +30,13 @@ public class StudentController {
     }
 
     @GetMapping("/number/{studentNumber}")
-    public ResponseEntity<StudentDTO.Response> getStudentByStudentNumber(
-            @PathVariable String studentNumber) {
+    public ResponseEntity<StudentDTO.Response> getStudentByStudentNumber(@PathVariable String studentNumber) {
         StudentDTO.Response student = studentService.getStudentByStudentNumber(studentNumber);
         return ResponseEntity.ok(student);
     }
 
     @PostMapping
-    public ResponseEntity<StudentDTO.Response> createStudent(
-            @Valid @RequestBody StudentDTO.Request request) {
+    public ResponseEntity<StudentDTO.Response> createStudent(@Valid @RequestBody StudentDTO.Request request) {
         StudentDTO.Response createdStudent = studentService.createStudent(request);
         return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
