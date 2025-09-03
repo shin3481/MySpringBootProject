@@ -1,6 +1,8 @@
 package com.rookies4.myspringboot.repository;
 
 import com.rookies4.myspringboot.entity.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,10 +22,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     //학번의 중복체크를 위한 메서드
     boolean existsByStudentNumber(String studentNumber);
 
-    //Department 관련해서 새로 추가된 매서드
-    @Query("SELECT s FROM Student s LEFT JOIN FETCH s.studentDetail " +
-            "LEFT JOIN FETCH s.department WHERE s.id = :id")
-    Optional<Student> findByIdWithAllDetails(@Param("id") Long id);
+    //Department 관련해서 새로 추가된 메서드
+    @Query("SELECT s FROM Student s LEFT JOIN FETCH s.studentDetail LEFT JOIN FETCH s.department WHERE s.id = :id")
+    Optional<Student> findByIdWithAllDetails(@Param("id") Long studentId);
 
     // 새로 추가된 메서드
     List<Student> findByDepartmentId(Long departmentId);
@@ -31,4 +32,18 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     // 새로 추가된 메서드
     @Query("SELECT COUNT(s) FROM Student s WHERE s.department.id = :departmentId")
     Long countByDepartmentId(@Param("departmentId") Long departmentId);
+
+    //Paging 과 Search(검색) 관련 메서드들
+    // 특정학과에 속한 학생의 ID로 조회 (페이징)
+    Page<Student> findByDepartmentId(Long departmentId, Pageable pageable);
+
+    // 학생 이름으로 검색 (페이징) '% name %'
+    Page<Student> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+    // 학생 번호로 검색 (페이징)
+    Page<Student> findByStudentNumberContainingIgnoreCase(String studentNumber, Pageable pageable);
+
+    // 특정학과에 속한 학생의 이름 검색 (페이징)
+    Page<Student> findByDepartmentIdAndNameContainingIgnoreCase(Long departmentId,
+                                                                String name, Pageable pageable);
 }
