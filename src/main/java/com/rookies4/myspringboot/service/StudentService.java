@@ -33,10 +33,12 @@ public class StudentService {
                 .map(StudentDTO.Response::fromEntity)
                 .toList();
     }
+
     // 페이징 처리된 모든 학생 조회
     public Page<StudentDTO.Response> getAllStudents(Pageable pageable) {
         Page<Student> students = studentRepository.findAll(pageable);
         return students.map(StudentDTO.Response::fromEntity);
+        //return students.map(entity -> StudentDTO.Response.fromEntity(entity));
     }
 
     public StudentDTO.Response getStudentById(Long id) {
@@ -53,6 +55,7 @@ public class StudentService {
         return StudentDTO.Response.fromEntity(student);
     }
 
+    // 페이징 처리 없는 특정 학과의 학생 조회
     public List<StudentDTO.Response> getStudentsByDepartmentId(Long departmentId) {
         // Validate department exists
         if (!departmentRepository.existsById(departmentId)) {
@@ -64,6 +67,18 @@ public class StudentService {
                 .stream()
                 .map(StudentDTO.Response::fromEntity)
                 .toList();
+    }
+
+    // 페이징 처리된 특정 학과의 학생 조회
+    public Page<StudentDTO.Response> getStudentsByDepartmentId(Long departmentId, Pageable pageable) {
+        // Validate department exists
+        if (!departmentRepository.existsById(departmentId)) {
+            throw new BusinessException(ErrorCode.RESOURCE_NOT_FOUND,
+                    "Department", "id", departmentId);
+        }
+
+        Page<Student> students = studentRepository.findByDepartmentId(departmentId, pageable);
+        return students.map(StudentDTO.Response::fromEntity);
     }
 
     @Transactional
