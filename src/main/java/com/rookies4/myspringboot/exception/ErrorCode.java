@@ -26,8 +26,8 @@ public enum ErrorCode {
     // Department specific errors - 학과 관련 특수한 경우
     DEPARTMENT_CODE_DUPLICATE("Department already exists with code: %s", HttpStatus.CONFLICT),
     DEPARTMENT_NAME_DUPLICATE("Department already exists with name: %s", HttpStatus.CONFLICT),
-    DEPARTMENT_HAS_STUDENTS("Cannot delete department with id: %s. It has %s students",
-                            HttpStatus.CONFLICT);
+    DEPARTMENT_HAS_STUDENTS("Cannot delete department with id: %s. It has %s students", HttpStatus.CONFLICT);
+
 
     private final String messageTemplate;
     private final HttpStatus httpStatus;

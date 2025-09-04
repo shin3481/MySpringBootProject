@@ -13,6 +13,6 @@ public class ProdConfig {
         return CustomVO.builder() //CustomerVOBuilder
                 .mode("운영모드")
                 .rate(1.5)
-                .build(); //CustomerVO 타입
+                .build(); //CustomerVO
     }
 }

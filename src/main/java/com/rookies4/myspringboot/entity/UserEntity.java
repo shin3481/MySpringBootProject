@@ -17,20 +17,20 @@ import java.time.LocalDateTime;
 @Setter
 @DynamicUpdate
 public class UserEntity {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-@NotEmpty(message = "name은 필수 입력항목 입니다.")
-@Column(nullable = false)
-private String name;
+    @NotEmpty(message = "Name은 필수 입력항목입니다!")
+    @Column(nullable = false)
+    private String name;
 
-@NotBlank(message = "email은 필수 입력항목 입니다.")
-@Column(unique = true, nullable = false)
-@Email
-private String email;
+    @NotBlank(message = "Email은 필수 입력항목입니다!")
+    @Email
+    @Column(unique = true, nullable = false)
+    private String email;
 
-@Column(nullable = false, updatable = false)
-@CreationTimestamp
-private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt=LocalDateTime.now();
 }

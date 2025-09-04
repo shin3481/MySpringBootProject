@@ -2,8 +2,10 @@ package com.rookies4.myspringboot.controller;
 
 import com.rookies4.myspringboot.entity.UserEntity;
 import com.rookies4.myspringboot.exception.BusinessException;
+import com.rookies4.myspringboot.repository.CustomerRepository;
 import com.rookies4.myspringboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/users")
+@RequestMapping("/api/users1")
 public class UserRestController {
     private final UserRepository userRepository;
 
@@ -40,7 +42,7 @@ public class UserRestController {
         UserEntity existUser = getExistUser(id);
         return existUser;
     }
-    //Email로 조회하고, 수정
+    //Email로 조회하고, 수정하기
     @PatchMapping("/{email}/")
     public UserEntity updateUser(@PathVariable String email, @RequestBody UserEntity userDetail){
         UserEntity existUser = userRepository.findByEmail(email) //Optional<UserEntity>
@@ -51,7 +53,7 @@ public class UserRestController {
         UserEntity updateUser = userRepository.save(existUser);
         return updateUser;
     }
-    //삭제
+    //삭제하기
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         UserEntity existUser = getExistUser(id);

@@ -1,6 +1,5 @@
 package com.rookies4.myspringboot.controller.dto;
 
-
 import com.rookies4.myspringboot.entity.Student;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+//StudentDTO
 public class StudentDTO {
 
     @Data

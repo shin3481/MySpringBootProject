@@ -13,6 +13,6 @@ public class TestConfig {
         return CustomVO.builder() //CustomerVOBuilder
                 .mode("테스트모드")
                 .rate(0.5)
-                .build(); //CustomerVO 타입
+                .build(); //CustomerVO
     }
 }

@@ -20,13 +20,12 @@ public class StudentSearchService {
      * 학생 검색 (이름 또는 학번으로)
      */
     public Page<StudentDTO.Response> searchStudents(String keyword, Pageable pageable) {
-        //학과ID로 검색
         if (!StringUtils.hasText(keyword)) {
             return studentRepository.findAll(pageable)
                     .map(StudentDTO.Response::fromEntity);
         }
 
-        // 학번으로 검색 시도
+        // 학번(StudentNumber) 검색 시도
         if (keyword.matches("^[A-Z]+\\d+$")) {
             return studentRepository.findByStudentNumberContainingIgnoreCase(keyword, pageable)
                     .map(StudentDTO.Response::fromEntity);
@@ -38,14 +37,15 @@ public class StudentSearchService {
     }
 
     /**
-     * 부서별 학생 검색
+     * 학과별 학생 검색
      */
     public Page<StudentDTO.Response> searchStudentsByDepartment(Long departmentId, String keyword, Pageable pageable) {
+        //학과ID로 검색
         if (!StringUtils.hasText(keyword)) {
             return studentRepository.findByDepartmentId(departmentId, pageable)
                     .map(StudentDTO.Response::fromEntity);
         }
-
+        // 학과ID와 학생이름으로 검색
         return studentRepository.findByDepartmentIdAndNameContainingIgnoreCase(departmentId, keyword, pageable)
                 .map(StudentDTO.Response::fromEntity);
     }

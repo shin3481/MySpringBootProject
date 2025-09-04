@@ -3,7 +3,7 @@ package com.rookies4.myspringboot.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 @Getter
-public class BusinessException extends RuntimeException {
+public class BusinessException extends RuntimeException {	
     private static final long serialVersionUID = 1L;
     private String message;
     private HttpStatus httpStatus;

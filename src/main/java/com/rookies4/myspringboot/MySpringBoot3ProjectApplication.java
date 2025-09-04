@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-//Aplication 클래스가 (Configuration)설정 클래스 역할을 한다. @SpringBootApplication
-//반스시 해당 클래스를 작성할때 base-package아래에 작성을 해야 한다.  @ComponentScan
-// 외부라이브러리에 대한 설정 기능을 제공하는 AutoConfiguration을 활성화 해주는 역할. @EnableAutoConfiguration
+//Application 클래스가 Configuration(설정) 클래스 역할을 한다. @SpringBootConfiguration
+//반드시 해당 클래스를 작성할때 base-package 아래에 작성을 해야 한다. @ComponentScan
+//외부라이브러리에 대한 설정기능을 제공하는 AutoConfiguration을 활성화 해주는 역할. @EnableAutoConfiguration
 public class MySpringBoot3ProjectApplication {
 
 	public static void main(String[] args) {
@@ -17,11 +17,12 @@ public class MySpringBoot3ProjectApplication {
         //SpringApplication.run(MySpringBoot3ProjectApplication.class, args);
         SpringApplication application = new SpringApplication(MySpringBoot3ProjectApplication.class);
         //Application 타입을 변경하기
-        application.setWebApplicationType(WebApplicationType.SERVLET); //Spring MVC
+        application.setWebApplicationType(WebApplicationType.SERVLET);
         application.run(args);
     }
+
     @Bean
-    public String hello(){
+    public String hello() {
         return "Hello SpringBoot";
     }
 
