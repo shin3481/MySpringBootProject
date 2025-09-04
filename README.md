@@ -13,4 +13,8 @@
 * DataInsertRunner
 * N+1 문제 해결
   * 성능개선
-  * HibernateModule 사용하여 BatchSize 설정하기
+  * HibernateModule 사용하여 BatchSize 설정하기, JOIN FETCH
+---
+  * Basic Authentication(인증) 과 Authorization(권한)
+  * JWT(Json Web Token) 토큰 인증처리
+    
