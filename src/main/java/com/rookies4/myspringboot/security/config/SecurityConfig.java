@@ -40,7 +40,8 @@ public class SecurityConfig {
                     auth.requestMatchers("/api/userinfos/**").permitAll()
                             .requestMatchers("/api/**").authenticated();
                 })
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(withDefaults())
